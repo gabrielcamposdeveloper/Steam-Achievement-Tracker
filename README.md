@@ -1,268 +1,444 @@
 # 🎮 Steam Achievement Tracker
 
-Uma aplicação web para acompanhar, analisar e visualizar o progresso de Achievements da Steam através da **Steam Web API**.
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-orange)
+![Backend](https://img.shields.io/badge/backend-.NET%209-purple)
+![Frontend](https://img.shields.io/badge/frontend-Angular-red)
+![Architecture](https://img.shields.io/badge/architecture-Hexagonal-blue)
 
-O projeto permite que usuários consultem estatísticas detalhadas da sua biblioteca, acompanhem o progresso dos jogos, comparem perfis e descubram quais conquistas estão mais próximas de serem concluídas.
+Uma plataforma completa para análise, acompanhamento e evolução de **Achievements da Steam**, construída com foco em **arquitetura de software de nível sênior**, utilizando **Arquitetura Hexagonal (Ports & Adapters)**, **DDD**, **CQRS**, **Vertical Slice Architecture** e boas práticas modernas do ecossistema .NET.
 
----
-
-# 📌 Objetivos
-
-* Consumir a Steam Web API.
-* Centralizar informações sobre Achievements.
-* Gerar estatísticas da biblioteca.
-* Exibir dashboards interativos.
-* Comparar progresso entre jogadores.
-* Demonstrar conhecimentos em arquitetura de software, APIs REST e desenvolvimento Full Stack.
+O objetivo do projeto é transformar dados da Steam Web API em uma experiência rica de análise de progresso, estatísticas e gamificação.
 
 ---
 
-# ✨ Funcionalidades
+# 🚀 Objetivos do Projeto
 
-## 📊 Dashboard
+Este projeto tem como objetivos:
 
-* Total de jogos da biblioteca
-* Jogos com Achievements
-* Horas totais jogadas
-* Percentual médio de conclusão
-* Jogos 100%
-* Jogos próximos de 100%
-* Jogos abandonados
-* Achievements desbloqueados
-* Achievements restantes
-
----
-
-## 🏆 Achievement Tracker
-
-Para cada jogo será exibido:
-
-* Nome
-* Capa
-* Horas jogadas
-* Total de Achievements
-* Achievements conquistados
-* Percentual de conclusão
-* Barra de progresso
-* Última conquista desbloqueada
-
----
-
-## 📈 Estatísticas
-
-* Jogos mais completos
-* Jogos menos completos
-* Achievements raros
-* Jogos nunca iniciados
-* Média de conclusão
-* Distribuição por gênero
-* Ranking dos jogos mais jogados
-
----
-
-## 👥 Comparação entre Usuários
-
-Comparação entre dois perfis públicos da Steam.
-
-Será possível visualizar:
-
-* Jogos em comum
-* Quem possui mais horas
-* Quem possui mais Achievements
-* Percentual de conclusão
-* Ranking
-
----
-
-## 🎯 Recomendações
-
-O sistema poderá sugerir:
-
-* Jogos próximos de 100%
-* Achievements fáceis
-* Jogos esquecidos
-* Próximos objetivos
-
----
-
-## 📄 Relatórios
-
-Exportação em:
-
-* PDF
-* CSV
-
----
-
-# 🛠 Tecnologias
-
-## Backend
-
-* ASP.NET Core 9
-* Entity Framework Core
-* PostgreSQL
-* Redis
-* Swagger
-
-## Frontend
-
-* React
-* TypeScript
-* Tailwind CSS
-* React Query
-* Recharts
-
-## Infraestrutura
-
-* Docker
-* Docker Compose
-* GitHub Actions
+* Praticar arquitetura escalável utilizando C# e Angular.
+* Aplicar princípios SOLID e Domain-Driven Design.
+* Criar uma aplicação preparada para crescimento.
+* Trabalhar integração com APIs externas.
+* Construir uma aplicação próxima de cenários reais de mercado.
+* Explorar padrões utilizados em sistemas corporativos.
 
 ---
 
 # 🏗 Arquitetura
 
+O projeto utiliza **Arquitetura Hexagonal (Ports & Adapters)**.
+
+O princípio principal:
+
+> O domínio da aplicação não depende de frameworks, banco de dados ou serviços externos.
+
+A Steam API, PostgreSQL, Redis e qualquer outro serviço externo são apenas detalhes de infraestrutura.
+
 ```text
-Steam Achievement Tracker
-
-        React
-
-          │
-
- REST API (ASP.NET Core)
-
-          │
-
-   Application Layer
-
-          │
-
-     Domain Layer
-
-          │
-
- Infrastructure Layer
-
-          │
-
- PostgreSQL + Redis
-
-          │
-
- Steam Web API
+                    Steam Web API
+                         |
+                         |
+                Steam API Adapter
+                         |
+                         |
++------------------------------------------------+
+|                                                |
+|              Application Core                  |
+|                                                |
+|   Use Cases | CQRS | Commands | Queries        |
+|                                                |
++------------------------------------------------+
+                         |
+                         |
+                 Domain Core
+                         |
+        Entities | Value Objects | Rules
+                         |
+                         |
++------------------------------------------------+
+|              Infrastructure                    |
+|                                                |
+| PostgreSQL | Redis | Authentication | Logging  |
+|                                                |
++------------------------------------------------+
 ```
 
 ---
 
-# 📂 Estrutura do Projeto
+# 🧱 Stack Tecnológica
 
-```text
-src/
+## Backend
 
- ├── SteamTracker.API
- ├── SteamTracker.Application
- ├── SteamTracker.Domain
- ├── SteamTracker.Infrastructure
- ├── SteamTracker.Persistence
- ├── SteamTracker.Shared
-
-frontend/
-
- ├── components
- ├── pages
- ├── hooks
- ├── services
- ├── layouts
- ├── assets
-```
-
----
-
-# 🔑 Integração com a Steam
-
-A aplicação utiliza a Steam Web API para obter:
-
-* Perfil do jogador
-* Biblioteca
-* Horas jogadas
-* Lista de Achievements
-* Estatísticas globais
-* Informações dos jogos
-
----
-
-# 📸 Telas Planejadas
-
-* Dashboard
-* Biblioteca
-* Detalhes do jogo
-* Comparação entre usuários
-* Estatísticas
-* Perfil
-* Configurações
-
----
-
-# 🚀 Roadmap
-
-## Versão 1.0
-
-* [ ] Login utilizando Steam OpenID
-* [ ] Importação da biblioteca
-* [ ] Dashboard
-* [ ] Lista de jogos
-* [ ] Progresso dos Achievements
-
----
-
-## Versão 1.1
-
-* [ ] Comparação entre usuários
-* [ ] Dashboard avançado
-* [ ] Histórico de progresso
-* [ ] Exportação em PDF
-
----
-
-## Versão 2.0
-
-* [ ] Recomendações com IA
-* [ ] Steam Wrapped
-* [ ] Ranking entre amigos
-* [ ] Notificações
-* [ ] Aplicativo mobile
-
----
-
-# 🎯 Objetivos Técnicos
-
-Este projeto foi desenvolvido para praticar:
-
-* Arquitetura Limpa (Clean Architecture)
-* SOLID
-* Domain-Driven Design (DDD)
-* Consumo de APIs REST
+* C#
+* .NET 9
+* ASP.NET Core Web API
 * Entity Framework Core
-* Cache com Redis
+* PostgreSQL
+* Redis
+* MediatR
+* FluentValidation
+* Serilog
+* OpenTelemetry
+* Swagger/OpenAPI
 * Docker
-* Autenticação
-* Testes unitários
-* Integração contínua (CI/CD)
 
 ---
 
-# 📚 Aprendizados
+## Frontend
 
-Durante o desenvolvimento serão explorados conceitos como:
+* Angular
+* TypeScript
+* Angular Standalone Components
+* Signals
+* RxJS
+* Angular Material
+* TailwindCSS
+* NgRx Signal Store
 
-* Integração com APIs externas
-* Modelagem de domínio
-* Persistência de dados
-* Cache
-* Tratamento de erros
-* Visualização de dados
-* Performance
-* Boas práticas de arquitetura
+---
+
+## Testes
+
+### Backend
+
+* xUnit
+* FluentAssertions
+* NSubstitute
+* Testcontainers
+
+### Frontend
+
+* Jest
+* Cypress
+
+---
+
+# 📂 Estrutura da Solution
+
+```text
+SteamAchievementTracker
+
+├── src
+│
+│── Api
+│
+│── Domain
+│   ├── Entities
+│   ├── ValueObjects
+│   ├── Aggregates
+│   ├── Events
+│   ├── Exceptions
+│   └── Rules
+│
+│── Application
+│   └── Features
+│       ├── Players
+│       ├── Library
+│       ├── Achievements
+│       └── Statistics
+│
+│── Infrastructure
+│   ├── Persistence
+│   ├── Steam
+│   ├── Cache
+│   ├── Authentication
+│   └── Logging
+│
+│── SharedKernel
+│
+│── Worker
+│
+├── tests
+│
+│── Domain.Tests
+│── Application.Tests
+│── Infrastructure.Tests
+│── Api.Tests
+│
+└── frontend
+    ├── core
+    ├── features
+    ├── shared
+    ├── layouts
+    └── components
+```
+
+---
+
+# 🧩 Padrão Vertical Slice Architecture
+
+As funcionalidades são organizadas por domínio e caso de uso.
+
+Exemplo:
+
+```text
+Application
+
+Features
+
+├── Library
+
+│   ├── ImportLibrary
+
+│   ├── GetLibrary
+
+│   └── SyncLibrary
+
+
+├── Achievements
+
+│   ├── GetAchievements
+
+│   ├── SyncAchievements
+
+│   └── CalculateProgress
+
+
+└── Players
+
+    ├── GetProfile
+
+    └── ComparePlayers
+```
+
+Cada funcionalidade contém:
+
+* Command/Query
+* Handler
+* Validator
+* DTOs
+* Regras específicas
+
+---
+
+# 🎯 Funcionalidades
+
+## 👤 Perfil Steam
+
+* Login utilizando Steam OpenID.
+* Importação do perfil.
+* Sincronização automática.
+* Histórico do jogador.
+
+---
+
+# 🎮 Biblioteca Steam
+
+Dashboard contendo:
+
+* Total de jogos.
+* Horas jogadas.
+* Jogos nunca iniciados.
+* Jogos mais jogados.
+* Jogos favoritos.
+* Evolução da biblioteca.
+
+---
+
+# 🏆 Achievement Tracker
+
+Sistema completo de acompanhamento:
+
+* Achievements desbloqueados.
+* Achievements restantes.
+* Percentual de conclusão.
+* Barra de progresso.
+* Última conquista obtida.
+* Jogos próximos de 100%.
+* Jogos completos.
+
+---
+
+# 📊 Analytics
+
+Métricas geradas:
+
+* Taxa média de conclusão.
+* Jogos finalizados.
+* Achievements raros.
+* Ranking pessoal.
+* Tempo investido.
+* Evolução mensal.
+
+---
+
+# 👥 Comparação entre Jogadores
+
+Possibilidade de comparar:
+
+* Biblioteca.
+* Horas jogadas.
+* Achievements.
+* Jogos em comum.
+* Percentual de conclusão.
+
+---
+
+# 🤖 Inteligência Artificial
+
+Funcionalidades futuras:
+
+* Recomendações personalizadas.
+* Análise de perfil gamer.
+* Sugestão de próximos jogos.
+* Explicação inteligente de recomendações.
+
+Exemplo:
+
+> "Você completou jogos de estratégia e gerenciamento. Baseado no seu histórico, este jogo possui alta compatibilidade."
+
+---
+
+# 🔌 Integrações
+
+## Steam Web API
+
+Dados utilizados:
+
+* Perfil do jogador.
+* Biblioteca.
+* Jogos.
+* Estatísticas.
+* Achievements.
+
+---
+
+# 🗄 Modelo Inicial de Domínio
+
+```text
+Player
+
+ └── SteamProfile
+
+
+Game
+
+ └── Achievements
+
+
+PlayerAchievement
+
+ └── CompletionStatus
+```
+
+---
+
+# ⚙️ Infraestrutura
+
+Ambiente utilizando Docker:
+
+```text
+Docker Compose
+
+├── API (.NET)
+├── Angular
+├── PostgreSQL
+├── Redis
+└── Seq
+```
+
+---
+
+# 🔍 Observabilidade
+
+Implementado:
+
+* Logs estruturados.
+* Tracing distribuído.
+* Métricas.
+* Monitoramento de erros.
+
+Tecnologias:
+
+* Serilog
+* OpenTelemetry
+* Seq
+* Jaeger
+
+---
+
+# 🔐 Segurança
+
+Implementações:
+
+* Steam OpenID Authentication.
+* JWT quando necessário.
+* Validação de entrada.
+* Rate limiting.
+* Tratamento global de exceções.
+
+---
+
+# 🛣 Roadmap
+
+## Fase 1 — Fundação
+
+* [ ] Criar arquitetura base.
+* [ ] Configurar Docker.
+* [ ] Configurar PostgreSQL.
+* [ ] Configurar Redis.
+* [ ] Criar domínio inicial.
+* [ ] Criar pipeline CI/CD.
+
+---
+
+## Fase 2 — Steam Integration
+
+* [ ] Steam OpenID.
+* [ ] Cliente Steam API.
+* [ ] Sincronização de biblioteca.
+* [ ] Persistência dos jogos.
+
+---
+
+## Fase 3 — Achievement System
+
+* [ ] Importar achievements.
+* [ ] Dashboard.
+* [ ] Estatísticas.
+* [ ] Progresso.
+
+---
+
+## Fase 4 — Evolução
+
+* [ ] Comparação entre jogadores.
+* [ ] Gamificação.
+* [ ] Steam Wrapped.
+* [ ] IA.
+* [ ] Aplicativo mobile.
+
+---
+
+# 🧪 Qualidade
+
+Práticas utilizadas:
+
+* Clean Code.
+* SOLID.
+* Code Review.
+* Testes automatizados.
+* Conventional Commits.
+* CI/CD.
+* Documentação técnica.
+
+---
+
+# 📚 Conceitos Aplicados
+
+Este projeto explora:
+
+* Arquitetura Hexagonal.
+* Domain-Driven Design.
+* CQRS.
+* Vertical Slice Architecture.
+* Repository Pattern.
+* Dependency Injection.
+* Domain Events.
+* Result Pattern.
+* Specification Pattern.
+* Cache distribuído.
+* Integração com APIs externas.
 
 ---
 
@@ -272,16 +448,12 @@ Durante o desenvolvimento serão explorados conceitos como:
 
 ---
 
-# 🤝 Contribuição
-
-Contribuições são bem-vindas. Sinta-se à vontade para abrir uma *Issue* ou enviar um *Pull Request*.
-
----
-
 # 📄 Licença
 
-Este projeto é distribuído sob a licença MIT.
+MIT License.
 
 ---
 
-> **Observação:** O acesso aos dados depende das configurações de privacidade do perfil Steam do usuário. Algumas informações podem não estar disponíveis para perfis privados.
+# 👨‍💻 Sobre
+
+Projeto desenvolvido com foco em aprendizado avançado de arquitetura de software, engenharia backend e desenvolvimento full stack moderno utilizando **C# + Angular**.
