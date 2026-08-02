@@ -1,6 +1,6 @@
 @SteamAchievementTracker.Api_HostAddress = http://localhost:5075
 
-GET {{SteamAchievementTracker.Api_HostAddress}}/weatherforecast/
+GET {{SteamAchievementTracker.Api_HostAddress}}/api/players/76561198000000000
 Accept: application/json
 
 ###
